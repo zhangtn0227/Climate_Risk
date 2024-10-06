@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>EY - Climate Risk</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" /> 
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />  
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">EY - Climate Risk {{App_dic.geo_address}}</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#!">Action</a>
+                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#!">Something else here</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Welcome to Climate Risk Tool</h1>
+                    <p>Ready to understand the climate risk to your asset?</p>
+                    <p>
+                        You can search and analyse the extreme weather and climate risk on any infrastructure or property anywhere in the world from now to 2100 in 4 easy steps:
+                    </p>
+                    
+                <form class="" action="update" method="post" enctype="multipart/form-data">
+                    <ol class="list-group">
+                        <li class="list-group-item">1. Type in a property or infrastructure address</li>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Address</span>
+                                </div>
+                                <input id="geolocation" name="geolocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value ="Eastern District, Hong Kong SAR">
+                              </div>
+                        <li class="list-group-item">2. Select an asset category from the drop-down menu</li>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="asset_category_option">asset category</label>
+                            </div>
+                            <select class="custom-select" id="asset_category_option" name="asset_category_option">
+                              <option selected>Choose...</option>
+                              <option value="1">Water Supply</option>
+                              <option value="2">Gas Supply</option>
+                              <option value="3">Power</option>
+                            </select>
+                        </div>
+                        <li class="list-group-item">3. Select an asset type from the drop-down menu</li>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="asset_type_option">asset type</label>
+                            </div>
+                            <select class="custom-select" id="asset_type_option" name="asset_type_option">
+                              <option selected>Choose...</option>
+                              <option value="1">Park</option>
+                              <option value="2">Street Pole</option>
+                              <option value="3">School</option>
+                            </select>
+                        </div>
+                        <li class="list-group-item">Hit GO to run your search</li><button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            GO
+                            </button>
+                    </ol>
+                </form>
+                </div>
+                
+                <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Climate Risk Analysis Report</h5>
+                <p name="output_geolocation" id="output_geolocation"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-ratings-tab" data-bs-toggle="tab" data-bs-target="#nav-ratings" type="button" role="tab" aria-controls="nav-ratings" aria-selected="true">Ratings</button>
+                    <button class="nav-link" id="nav-detail-tab" data-bs-toggle="tab" data-bs-target="#nav-detail" type="button" role="tab" aria-controls="nav-detail" aria-selected="false">Detail</button>
+                    <button class="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Settings</button>
+                    <button class="nav-link" id="nav-location-tab" data-bs-toggle="tab" data-bs-target="#nav-location" type="button" role="tab" aria-controls="nav-location" aria-selected="false">Location</button>
+                    <button class="nav-link" id="nav-var-tab" data-bs-toggle="tab" data-bs-target="#nav-var" type="button" role="tab" aria-controls="nav-var" aria-selected="false">Value At Risk</button>
+                    <button class="nav-link" id="nav-breakdown-tab" data-bs-toggle="tab" data-bs-target="#nav-breakdown" type="button" role="tab" aria-controls="nav-breakdown" aria-selected="false">Breakdown</button>
+                    <button class="nav-link" id="nav-vulnerability-tab" data-bs-toggle="tab" data-bs-target="#nav-vulnerability" type="button" role="tab" aria-controls="nav-vulnerability" aria-selected="false">Vulnerability</button>
+                    <button class="nav-link" id="nav-samplereport-tab" data-bs-toggle="tab" data-bs-target="#nav-samplereport" type="button" role="tab" aria-controls="nav-samplereport" aria-selected="false">View a Sample Report</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-ratings" role="tabpanel" aria-labelledby="nav-ratings-tab">ratings content</div>
+                    <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">Detail content</div>
+                    <div class="tab-pane fade" id="nav-setting" role="tabpanel" aria-labelledby="nav-setting-tab">Settings content</div>
+                    <div class="tab-pane fade" id="nav-location" role="tabpanel" aria-labelledby="nav-location-tab">Location</div>
+                    <div class="tab-pane fade" id="nav-var" role="tabpanel" aria-labelledby="nav-var-tab">Value At Risk</div>
+                    <div class="tab-pane fade" id="nav-breakdown" role="tabpanel" aria-labelledby="nav-breakdown-tab">Breakdown</div>
+                    <div class="tab-pane fade" id="nav-vulnerability" role="tabpanel" aria-labelledby="nav-vulnerability-tab">Vulnerability</div>
+                    <div class="tab-pane fade" id="nav-samplereport" role="tabpanel" aria-labelledby="nav-samplereport-tab">View a Sample Report</div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script> 
+        <script>
+        </script>
+        </body>
+</html>
