@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 
-{% block title %}EY - Climate Risk{% endblock %}
+{% block title %}EY - AML Risk{% endblock %}
 
 
 
@@ -32,48 +32,53 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
-            <h1 class="mt-4">Welcome to Climate Risk Tool</h1>
-            <p>Ready to understand the climate risk to your asset?</p>
+            <h1 class="mt-4">Welcome to EY Alert Triage management interface </h1>
+            <p>Ready to understand the AML risk?</p>
             <p>
-                You can search and analyse the extreme weather and climate risk on any infrastructure or property anywhere in the world from now to 2100 in 4 easy steps:
+                You can run triage model and do investigation in 4 easy steps:
             </p>
             
-        <form class="" action="update" method="post" enctype="multipart/form-data">
+        <form class="" >
             <ol class="list-group">
-                <li class="list-group-item">1. Type in a property or infrastructure address</li>
+                <li class="list-group-item">1. Triage model batch run </li>
                     <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm">Address</span>
-                        </div>
-                        <input id="geolocation" name="geolocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value ="Eastern District, Hong Kong SAR">
+                        <li class="list-group-item">Hit Run to run triage model</li>
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Run
+                        </button>
+                        
                       </div>
-                <li class="list-group-item">2. Select an asset category from the drop-down menu</li>
+                <li class="list-group-item">2. Visualization on triage management interface</li>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="asset_category_option">asset category</label>
-                    </div>
-                    <select class="custom-select" id="asset_category_option" name="asset_category_option">
-                      <option selected>Choose...</option>
-                      <option value="1">Water Supply</option>
-                      <option value="2">Gas Supply</option>
-                      <option value="3">Power</option>
-                    </select>
+   
                 </div>
-                <li class="list-group-item">3. Select an asset type from the drop-down menu</li>
+                
+                <li class="list-group-item">3. Triaged case details for investigation</li>
+                <div class="input-group mb-3">
+                    <li class="list-group-item">Hit Run to run triage model</li>
+                    <form class="" method="post" enctype="multipart/form-data">
+                    <a type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Run
+                    </a>
+                    </form>
+                </div>
+                
+
+                <li class="list-group-item">4. Select result for the case </li>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <label class="input-group-text" for="asset_type_option">asset type</label>
+                      <label class="input-group-text" for="asset_type_option">Investigation Result</label>
                     </div>
                     <select class="custom-select" id="asset_type_option" name="asset_type_option">
                       <option selected>Choose...</option>
-                      <option value="1">Park</option>
-                      <option value="2">Street Pole</option>
-                      <option value="3">School</option>
+                      <option value="1">Escalated</option>
+                      <option value="2">Innocent and Closed</option>
                     </select>
                 </div>
-                <li class="list-group-item">Hit GO to run your search</li><button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    GO
-                    </button>
+                <li class="list-group-item">Hit Submit to submit your result</li>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Submit
+                </button>
             </ol>
         </form>
         </div>
@@ -84,35 +89,127 @@
         <div class="modal-dialog modal-xl">
         <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Climate Risk Analysis Report</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Case Detail</h5>
         <p name="output_geolocation" id="output_geolocation"></p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-ratings-tab" data-bs-toggle="tab" data-bs-target="#nav-ratings" type="button" role="tab" aria-controls="nav-ratings" aria-selected="true">Ratings</button>
+            <button class="nav-link active" id="nav-ratings-tab" data-bs-toggle="tab" data-bs-target="#nav-ratings" type="button" role="tab" aria-controls="nav-ratings" aria-selected="true">Case Info</button>
             <button class="nav-link" id="nav-detail-tab" data-bs-toggle="tab" data-bs-target="#nav-detail" type="button" role="tab" aria-controls="nav-detail" aria-selected="false">Detail</button>
-            <button class="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Settings</button>
-            <button class="nav-link" id="nav-location-tab" data-bs-toggle="tab" data-bs-target="#nav-location" type="button" role="tab" aria-controls="nav-location" aria-selected="false">Location</button>
-            <button class="nav-link" id="nav-var-tab" data-bs-toggle="tab" data-bs-target="#nav-var" type="button" role="tab" aria-controls="nav-var" aria-selected="false">Value At Risk</button>
-            <button class="nav-link" id="nav-breakdown-tab" data-bs-toggle="tab" data-bs-target="#nav-breakdown" type="button" role="tab" aria-controls="nav-breakdown" aria-selected="false">Breakdown</button>
-            <button class="nav-link" id="nav-vulnerability-tab" data-bs-toggle="tab" data-bs-target="#nav-vulnerability" type="button" role="tab" aria-controls="nav-vulnerability" aria-selected="false">Vulnerability</button>
-            <button class="nav-link" id="nav-samplereport-tab" data-bs-toggle="tab" data-bs-target="#nav-samplereport" type="button" role="tab" aria-controls="nav-samplereport" aria-selected="false">View a Sample Report</button>
+            <button class="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Feature</button>
+            
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-ratings" role="tabpanel" aria-labelledby="nav-ratings-tab">ratings content</div>
-            <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">Detail content</div>
-            <div class="tab-pane fade" id="nav-setting" role="tabpanel" aria-labelledby="nav-setting-tab">Settings content</div>
-            <div class="tab-pane fade" id="nav-location" role="tabpanel" aria-labelledby="nav-location-tab">Location</div>
-            <div class="tab-pane fade" id="nav-var" role="tabpanel" aria-labelledby="nav-var-tab">Value At Risk</div>
-            <div class="tab-pane fade" id="nav-breakdown" role="tabpanel" aria-labelledby="nav-breakdown-tab">Breakdown</div>
-            <div class="tab-pane fade" id="nav-vulnerability" role="tabpanel" aria-labelledby="nav-vulnerability-tab">Vulnerability</div>
-            <div class="tab-pane fade" id="nav-samplereport" role="tabpanel" aria-labelledby="nav-samplereport-tab">View a Sample Report</div>
+            <div class="tab-pane fade show active" id="nav-ratings" role="tabpanel" aria-labelledby="nav-ratings-tab">
+                <div class="container">
+                    <h2>Case Information</h2>
+                    <p>Case information is as below:</p>            
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Case ID</th>
+                                <th>Name</th>
+                                <th>Case Typology</th>
+                                <th>Case Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CASE10086</td>
+                                <td>John Doe</td>
+                                <td>Money Mule</td>
+                                <td>0.9</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
+                <h2>Detail content</h2>
+                <p>
+                    Case is raised at lookback period from 20241030 to 20250130, Entity Id is CXXXX09, Customer Name is John Doe, Total transaction value is 2432894, total transaction volume is 234, 
+                    transferred account is 20, City is Phnom Penh, he is new aboard customer, average transaction value is 10397, Max transaction value is 400000, Max transaction volume per day is 12,
+                    counterparty volume is 20 and min transaction value is 200...
+                </p>
+
+            </div>
+            <div class="tab-pane fade" id="nav-setting" role="tabpanel" aria-labelledby="nav-setting-tab">
+                <div class="container mt-5">
+                    <div class="container">
+                        <h2>Feature Information</h2>         
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Feature Name</th>
+                                    <th>Importance Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Txn Val</td>
+                                    <td>84</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Txn Vol</td>
+                                    <td>81</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Account Vol</td>
+                                    <td>80</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>City</td>
+                                    <td>72</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>New Aboard</td>
+                                    <td>60</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Avg Txn Val</td>
+                                    <td>55</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Max Txn Val</td>
+                                    <td>45</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Max Txn Vol</td>
+                                    <td>31</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Ctp Vol</td>
+                                    <td>28</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Min Txn Val</td>
+                                    <td>10</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Feature Importance</h2>
+                    <svg width="600" height="400"></svg>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
         </div>
         </div>
         </div>

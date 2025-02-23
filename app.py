@@ -35,18 +35,25 @@ def base():
     """Return the homepage."""
     return render_template("index.html", App_dic=App_dic)
 
-@app.route("/update",methods=['POST'])
-def update():
+'''
+@app.route("/direct_case_detail",methods=['POST'])
+def redirect_to_page():
     """Return the homepage."""
-
+    """
     geolocation = request.form['geolocation']
     asset_category_option = request.form['asset_category_option']
     asset_type_option = request.form['asset_type_option']
     App_dic['geo_address'] = geolocation
     App_dic['asset_category_option'] = Asset_category_dic[asset_category_option]
     App_dic['asset_type_option'] = Asset_type_dic[asset_type_option]
-    return render_template("customerinput.html",App_dic = App_dic)
-
+    """
+    return redirect(url_for('case_detail'))
+    #return render_template("customerinput.html",App_dic = App_dic)
+'''
+@app.route("/case_detail",methods=['GET'])
+def case_detail():
+    """Return the homepage."""
+    return ""
 
                 
 
