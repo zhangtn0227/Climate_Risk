@@ -30,8 +30,14 @@ Asset_type_dic = {
 
 app = Flask(__name__, static_folder='static')
 
+
 @app.route("/")
 def base():
+    """Return the homepage."""
+    return render_template("index.html", App_dic=App_dic)
+
+@app.route("/dashboard")
+def dashboard():
     """Return the homepage."""
     return render_template("index.html", App_dic=App_dic)
 
@@ -55,7 +61,9 @@ def case_detail():
     """Return the homepage."""
     return ""
 
-                
+@app.route('/investigator')
+def investigator():
+    return render_template("investigator.html")
 
 
 if __name__ == "__main__":

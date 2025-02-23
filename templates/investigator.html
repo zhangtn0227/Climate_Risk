@@ -40,17 +40,38 @@
             
         <form class="" >
             <ol class="list-group">
-                <li class="list-group-item">1. Triage model batch run by tool owner</li>
-                    <div class="input-group input-group-sm mb-3">
-                        <li class="list-group-item">Hit Run to run triage model</li>
-                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            Run
-                        </button>
-                        
-                      </div>
-                <li class="list-group-item">2. Visualization of triage model result on this interface </li>
+                
+                <li class="list-group-item">3. Display triaged case details</li>
                 <div class="input-group mb-3">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="d-flex justify-content-end mt-3">
+                            <input id="case_id_input" name="case_id_input" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value ="Input Case ID and click search">
+                            <form class="" method="post" enctype="multipart/form-data">
+                                <a type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Search
+                                </a>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
+                
+
+                <li class="list-group-item">4. Result to synchronize the system </li>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="asset_type_option">Investigation Result</label>
+                    </div>
+                    <select class="custom-select" id="asset_type_option" name="asset_type_option">
+                      <option selected>Choose...</option>
+                      <option value="1">Proposed to escalate</option>
+                      <option value="2">Proposed to close</option>
+                    </select>
+                </div>
+                <li class="list-group-item">Hit Submit to submit your result</li>
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Submit
+                </button>
             </ol>
         </form>
         </div>

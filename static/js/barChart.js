@@ -12,9 +12,8 @@ const data = [
     {label: "Min Txn Val", value: 10}
 
 ];
-
 // 设置画布大小
-const margin = {top: 20, right: 30, bottom: 40, left: 40},
+const margin = {top: 20, right: 30, bottom: 40, left: 100},
       width = 600 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
@@ -25,35 +24,36 @@ const svg = d3.select("svg")
             .append("g")
               .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// X轴比例尺
-const x = d3.scaleBand()
+// Y轴比例尺
+const y = d3.scaleBand()
             .domain(data.map(d => d.label))
-            .range([0, width])
+            .range([0, height])
             .padding(0.2);
 
-// Y轴比例尺
-const y = d3.scaleLinear()
+// X轴比例尺
+const x = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.value)])
             .nice()
-            .range([height, 0]);
+            .range([0, width]);
+
+// 添加Y轴
+svg.append("g")
+   .call(d3.axisLeft(y))
+   .selectAll("text")
+   .attr("class", "axis-label");
 
 // 添加X轴
 svg.append("g")
    .attr("transform", `translate(0,${height})`)
-   .call(d3.axisBottom(x))
-   .selectAll("text")
-   .attr("class", "axis-label");
-
-// 添加Y轴
-svg.append("g")
-   .call(d3.axisLeft(y));
+   .call(d3.axisBottom(x));
 
 // 绘制条形图
 svg.selectAll(".bar")
    .data(data)
    .enter().append("rect")
    .attr("class", "bar")
-   .attr("x", d => x(d.label))
-   .attr("y", d => y(d.value))
-   .attr("width", x.bandwidth())
-   .attr("height", d => height - y(d.value));
+   .attr("y", d => y(d.label))
+   .attr("x", 0) // 水平条形图从左侧开始绘制
+   .attr("width", d => x(d.value)) // 宽度由数据值决定
+   .attr("height", y.bandwidth())
+   .attr("fill", "red");
